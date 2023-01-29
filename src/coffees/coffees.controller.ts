@@ -16,7 +16,7 @@ export class CoffeesController {
   // /coffees/:id
   @Get(':id')
   findOne(@Param('id') id: number, @Res() res) {   
-    res.status(HttpStatus.OK).json(this.coffeesService.findOne(id));
+    res.status(HttpStatus.OK).json(this.coffeesService.findOne(+id));
   }
 
   // coffees
