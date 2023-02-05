@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinTable, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, JoinTable, ManyToMany, Index } from "typeorm";
 import { Flavor } from "./flavor.entity";
 
+@Index(['name', 'brand'])
 @Entity() // sql table = 'coffee' | 'coffee'
 export class Coffee {
     @PrimaryGeneratedColumn()   // Auto increment primary key
@@ -27,4 +28,7 @@ export class Coffee {
 
     @UpdateDateColumn({ type: 'timestamptz', nullable: true })
     date_updated: Date;
+
+    @DeleteDateColumn()
+    date_deleted: Date;
 }
