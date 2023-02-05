@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm"
 
-const dbConfig = new DataSource({
+const PostgresDataSource = new DataSource({
     type: 'postgres',                           // type of our database
     host: process.env.HOST,                     // database host
     port: parseInt(process.env.POSTGRES_PORT),  // database port
@@ -11,4 +11,12 @@ const dbConfig = new DataSource({
     synchronize: true                           // your entities will be synced with the database(recommended: disable in prod)
   })
 
-export default dbConfig;
+PostgresDataSource.initialize()
+.then(() => {
+    console.log("Data Source has been initialized!")
+})
+.catch((err) => {
+    console.error("Error during Data Source initialization", err)
+})
+
+export default PostgresDataSource;

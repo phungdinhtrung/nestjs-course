@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';       // for using process.env
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CoffeesModule } from './coffees/coffees.module';
+import { ConfigModule } from '@nestjs/config';       // for using process.env
+import { AppController } from './app.controller';
+import { CoffeesModule } from './coffees/coffee.module';
 
 @Module({
   imports: [
