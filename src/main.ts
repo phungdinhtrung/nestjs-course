@@ -2,15 +2,22 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
+let PORT = 3000
+
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
+
 	app.useGlobalPipes(
-		new ValidationPipe({
-			transform: true,            // config to auto transform path params and query params to be type valid param in service
-			whitelist: true, 			// config to remove invalid data object send to server then do action (ex: insert valid data to db)
-			forbidNonWhitelisted: true  // config to not allow to do action (ex: insert invalid data to db) and then message to user
+		new ValidationPipe({            // ValidationPipe: kiểm tra dữ liệu gửi lên server. Auto validate theo DTO rule trong entity (thường dùng cho khi insert và update)
+			transform: true,            // Sử dụng để tự động chuyển query và params từ dạng string sang dạng đã định nghĩa trong entity (nên để)
+			whitelist: true, 			// to remove invalid data object send to server: loại bỏ mã độc gửi lên server
+			forbidNonWhitelisted: true  // to not allow to thực thi các mã độc insert và update vào database
 		})
 	);
-	await app.listen(3000);
+    
+	await app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
 }
+
 bootstrap();

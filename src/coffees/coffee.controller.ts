@@ -1,4 +1,6 @@
-import { Controller, Get, Res, Param, Post, Patch, Delete, Body, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Res, Param, Post, Patch, Delete, Body, HttpStatus,
+    ParseIntPipe, ValidationPipe, UsePipes
+} from '@nestjs/common';
 import { CoffeesService } from './coffee.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -7,14 +9,14 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService){}
 
-  // /coffee
+  // coffee
   @Get()
   async findAll(@Res() res) {
     const coffee = await this.coffeesService.findAll()   
     res.status(HttpStatus.OK).json(coffee);
   }
 
-  // /coffee/:id
+  // coffee/:id
   @Get(':id')
   async findOne(@Param('id') id: number, @Res() res) { 
     const coffee = await this.coffeesService.findOne(id)

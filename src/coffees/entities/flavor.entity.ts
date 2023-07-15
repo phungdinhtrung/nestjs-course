@@ -15,3 +15,4 @@ export class Flavor {
     )
     coffees: Coffee[]
 }
+

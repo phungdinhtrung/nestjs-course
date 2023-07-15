@@ -7,7 +7,10 @@ import { CoffeesModule } from './coffees/coffee.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ // for using process.env
+        envFilePath: '.env',                     
+        isGlobal: true,  
+    }),                       
     TypeOrmModule.forRoot({
       type: 'postgres',                           // type of our database
       host: process.env.HOST,                     // database host
@@ -23,5 +26,6 @@ import { CoffeesModule } from './coffees/coffee.module';
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule {}
 
